@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bored - EnpiiCoding</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="w-full h-screen overflow-hidden max-h-screen bg-slate-100">
+  <div class="container mx-auto px-4 relative flex justify-center items-center h-screen">
+    <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-1/3 mb-4">
+      <div class="w-full p-8 bg-slate-50 rounded-3xl shadow-lg">
+        <div class="w-full flex justify-center mb-4">
+          <img src="" class="w-auto h-52" alt="Gif">
+        </div>
+
+        <div class="border-t border-slate-200 pt-4">
+          <div class="w-full text-center text-slate-600 text-2xl sm:text-3xl xl:text-4xl font-medium" id="question">
+          </div>
+          <div class="w-full flex justify-center gap-2 mt-6" id="button">
+            <button
+              class="rounded-lg cursor-pointer bg-green-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button" id="yes">
+              Yes
+            </button>
+            <button
+              class="rounded-lg cursor-pointer bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button" id="no">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let INDEX = 0;
+    let questions = [{
+      question: "Hai, mau jadi alasan aku senyum hari ini?",
+      image: "./assets/images/menhera-peek.gif",
+      yes_label: "Boleh",
+      no_label: "Enggak deh"
+    }, {
+      question: "Pliss..",
+      image: "./assets/images/menhera-please.gif",
+      yes_label: "Yaudah, iyaa",
+      no_label: "Engga mau"
+    }, {
+      question: "Aku mohon",
+      image: "./assets/images/chibi-menhera-sad.gif",
+      yes_label: "Okeedeh",
+      no_label: "Beneran, ga mau"
+    }, {
+      question: "Pleaseee",
+      image: "./assets/images/chibi-menhera-crying.gif",
+      yes_label: "Oke",
+      no_label: "Ga, aku tetep ga mau"
+    }, {
+      question: "Tolong dong",
+      image: "./assets/images/chibi-menhera-cry.gif",
+      yes_label: "Iyadeh",
+      no_label: "Terserah"
+    }];
+
+    let confirm = {
+      question: "Yay! Senyumku resmi buatmu!",
+      image: "./assets/images/menhera-smile.gif",
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setContent(questions[INDEX]);
+
+      document.querySelector("#yes").addEventListener("click", () => {
+        setContent(confirm, false, false);
+
+        document.querySelector('#button').classList.add('hidden')
+      })
+
+      document.querySelector("#no").addEventListener("click", () => {
+        INDEX++;
+
+        var no_button = true;
+        if (INDEX >= (questions.length - 1)) {
+          no_button = false;
+        }
+
+        setContent(questions[INDEX], true, no_button);
+      })
+    })
+
+    function setContent(data, yes = true, no = true) {
+      document.querySelector("#question").innerHTML = data.question;
+      document.querySelector("img").src = data.image;
+
+      if (yes) {
+        document.querySelector("#yes").innerHTML = data.yes_label;
+        document.querySelector('#yes').classList.add('block')
+      } else {
+        document.querySelector('#yes').classList.add('hidden')
+      }
+
+      if (no) {
+        document.querySelector("#no").innerHTML = data.no_label;
+        document.querySelector('#no').classList.add('block')
+      } else {
+        document.querySelector('#no').classList.add('hidden')
+        document.querySelector('#yes').classList.add('w-full')
+      }
+    }
+  </script>
+</body>
+
+</html>
